@@ -18,7 +18,7 @@ pipeline {
         }
         stage('deployment') {
             steps {
-                echo "deeep"
+                echo "dep"
             }
         }
     }
