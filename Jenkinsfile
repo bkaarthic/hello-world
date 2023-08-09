@@ -14,5 +14,10 @@ pipeline {
                 sh "docker build -t mytom /var/lib/jenkins/workspace/hello"
             }
         }
+        stage('docker container') {
+            steps {
+                sh "docker run -d --name tommy -p 8090:8080 mytom"
+            }
+        }
     }
 }
