@@ -9,7 +9,7 @@ pipeline {
                 sh "mvn clean install -D.maven.test.skip=true"
             }
         }
-        stage('unit test') {
+        stage('unit ') {
             steps {
                 sh "mvn surefire-report:report"
             }
