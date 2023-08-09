@@ -9,18 +9,9 @@ pipeline {
                 sh "mvn clean install"
             }
         }
-        stage('prune image') {
-            steps {
-                sh '''
-                    docker stop tommy
-                    docker rm tommy
-                    docker rmi mytom
-                   '''
-            }
-        }
         stage('docker image') {
             steps {
-                sh "docker build -t mytom /var/lib/jenkins/workspace/hello"
+                sh "docker build -t mytom /var/lib/jenkins/workspace/demo"
             }
         }
         stage('docker container') {
