@@ -19,5 +19,17 @@ pipeline {
                 sh "docker run -d --name tommy -p 8090:8080 mytom"
             }
         }
+        stage('waiting for approval') {
+            steps {
+                timeout(time: 5, unit: 'HOURS') {
+                    input message: 'are we good to deploy in production', ok: 'Yes'
+                }
+            }
+        }
+        stage('deploying in production') {
+            steps {
+                echo "successfully deployed in production"
+            }
+        }
     }
 }
