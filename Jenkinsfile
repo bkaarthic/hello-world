@@ -37,4 +37,12 @@ pipeline {
             }
         }
     }
+    post {
+	    success {
+		    mail bcc: '', body: 'successfully deployed', cc: '', from: '', replyTo: '', subject: 'build is successfull', to: 'bkaarthic@gmail.com'
+	    }
+	    failure {
+		    mail bcc: '', body: 'successfully deployed', cc: '', from: '', replyTo: '', subject: 'build failed', to: 'bkaarthic@gmail.com'
+	    }
+    }
 }
