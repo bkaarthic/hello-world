@@ -4,16 +4,24 @@ pipeline {
         PATH = "/opt/maven/bin:$PATH"
     }
     stages {
+        stage('git') {
+            steps {
+                git credentialsId: 'git-creds', url: 'https://github.com/bkaarthic/hello-world.git'
+            }
+        }
         stage('build') {
             steps {
-                timeout(time: 30, unit: 'SECONDS') {
-                    sh "mvn clean install -D.maven.test.skip=true"
-                }
+                sh "mvn clean install -D.maven.test.skip=true"
+            }
+        }
+        stage('unit test') {
+            steps {
+                sh "mvn surefire-report:report"
             }
         }
         stage('docker image') {
             steps {
-                sh "docker build -t mytom /var/lib/jenkins/workspace/hello"
+                sh "docker build -t mytom /var/lib/jenkins/workspace/tempo"
             }
         }
         stage('docker container') {
@@ -21,25 +29,17 @@ pipeline {
                 sh "docker run -d --name tommy -p 8090:8080 mytom"
             }
         }
-        stage('waiting for approval') {
+        stage('approval') {
             steps {
-                timeout(time: 5, unit: 'HOURS') {
-                    input message: 'are we good to deploy in production', ok: 'Yes'
-                }
+                timeout(time: 15, unit: "MINUTES") {
+	                    input message: 'Do you want to approve the deployment?', ok: 'Yes'
+	                }
             }
         }
-        stage('deploying in production') {
+        stage('deployment') {
             steps {
-                echo "successfully deployed in production"
+                echo "deployed"
             }
         }
     }
-    post {
-        success {
-            mail bcc: '', body: 'test', cc: '', from: '', replyTo: '', subject: 'build is success', to: 'bkaarthic@gmail.com'
-            }
-        failure {
-            mail bcc: '', body: 'test', cc: '', from: '', replyTo: '', subject: 'build failed', to: 'bkaarthic@gmail.com'
-            }
-        }
 }
