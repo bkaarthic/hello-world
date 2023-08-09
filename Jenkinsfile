@@ -32,4 +32,12 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            mail bcc: '', body: 'test', cc: '', from: '', replyTo: '', subject: 'build is success', to: 'bkaarthic@gmail.com'
+            }
+        failure {
+            mail bcc: '', body: 'test', cc: '', from: '', replyTo: '', subject: 'build failed', to: 'bkaarthic@gmail.com'
+            }
+        }
 }
