@@ -11,7 +11,7 @@ pipeline {
         }
         stage('docker image') {
             steps {
-                sh "docker build -t mytom /var/lib/jenkins/workspace/demo"
+                sh "docker build -t mytom /var/lib/jenkins/workspace/hello"
             }
         }
     }
