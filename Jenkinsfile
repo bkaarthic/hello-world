@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh "mvn clean deploy -D.maven.test.skip=true"
+                sh "mvn clean deploy"
             }
         }
         stage('prune image') {
