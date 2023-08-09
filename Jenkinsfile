@@ -7,7 +7,7 @@ pipeline {
         stage('build') {
             steps {
                 timeout(time: 60, unit: 'SECONDS') {
-                    sh "mvn clean install"
+                    sh "mvn clean package"
                 }
             }
         }
