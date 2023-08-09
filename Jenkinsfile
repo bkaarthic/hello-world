@@ -4,9 +4,19 @@ pipeline {
         PATH = "/opt/maven/bin:$PATH"
     }
     stages {
+        stage('git') {
+            steps {
+                git credentialsId: 'git-creds', url: 'https://github.com/bkaarthic/hello-world.git'
+            }
+        }
         stage('build') {
             steps {
-                sh "mvn clean install"
+                sh "mvn clean install -D.maven.test.skip=rue"
+            }
+        }
+        stage('unit test') {
+            steps {
+                sh "mvn surefire-report:report"
             }
         }
         stage('approval') {
@@ -18,9 +28,17 @@ pipeline {
         }
         stage('deployment') {
             steps {
-                echo "dep"
+                echo "deployed"
             }
         }
     }
+    
+    post {
+        success {
+            mail bcc: '', body: 'test', cc: '', from: '', replyTo: '', subject: 'build is success', to: 'bkaarthic@gmail.com'
+            }
+        failure {
+            mail bcc: '', body: 'test', cc: '', from: '', replyTo: '', subject: 'build failed', to: 'bkaarthic@gmail.com'
+            }
+        }
 }
-
