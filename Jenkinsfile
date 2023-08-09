@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                timeout(time: 45, unit: 'SECONDS') {
+                timeout(time: 30, unit: 'SECONDS') {
                     sh "mvn clean install -D.maven.test.skip=true"
                 }
             }
