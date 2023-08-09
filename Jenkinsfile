@@ -4,11 +4,6 @@ pipeline {
         maven 'maven-3'
     }
     stages {
-        stage('git') {
-            steps {
-                git credentialsId: 'git-creds', url: 'https://github.com/bkaarthic/hello-world.git'
-            }
-        }
         stage('build') {
             steps {
                 sh "mvn clean install -D.maven.test.skip=true"
