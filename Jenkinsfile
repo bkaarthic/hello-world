@@ -6,7 +6,9 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh "mvn clean install"
+                timeout(time: 60, unit: 'SECONDS') {
+                    sh "mvn clean install"
+                }
             }
         }
         stage('docker image') {
