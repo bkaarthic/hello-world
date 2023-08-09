@@ -16,7 +16,7 @@ pipeline {
         }
         stage('docker image') {
             steps {
-                sh "docker build -t new /var/lib/jenkins/workspace/first"
+                sh "docker build -t new /var/lib/jenkins/workspace/webapp"
             }
         }
         stage('deploying in dev') {
