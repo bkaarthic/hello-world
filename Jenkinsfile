@@ -4,11 +4,6 @@ pipeline {
         PATH = "/opt/maven/bin:$PATH"
     }
     stages {
-        stage('git') {
-            steps {
-                git credentialsId: 'git-creds', url: 'https://github.com/bkaarthic/hello-world.git'
-            }
-        }
         stage('build') {
             steps {
                 sh "mvn clean install -D.maven.test.skip=true"
@@ -21,12 +16,12 @@ pipeline {
         }
         stage('docker image') {
             steps {
-                sh "docker build -t mytom /var/lib/jenkins/workspace/tempo"
+                sh "docker build -t mytom /var/lib/jenkins/workspace/first"
             }
         }
-        stage('docker container') {
+        stage('deploying in dev') {
             steps {
-                sh "docker run -d --name tommy -p 8090:8080 mytom"
+                sh "docker run -d --name tommy -p 8081:8080 web"
             }
         }
         stage('approval') {
