@@ -16,12 +16,12 @@ pipeline {
         }
         stage('docker image') {
             steps {
-                sh "docker build -t mytom /var/lib/jenkins/workspace/first"
+                sh "docker build -t new /var/lib/jenkins/workspace/first"
             }
         }
         stage('deploying in dev') {
             steps {
-                sh "docker run -d --name tommy -p 8081:8080 web"
+                sh "docker run -d --name web -p 8081:8080 new"
             }
         }
         stage('approval') {
