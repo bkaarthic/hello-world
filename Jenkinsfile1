@@ -1,17 +1,12 @@
 pipeline {
     agent any
-    tools {
-        maven 'maven-3'
+    environment {
+        PATH = "/opt/maven/bin:$PATH"
     }
     stages {
         stage('build') {
             steps {
-                sh "mvn clean install -D.maven.test.skip=true"
-            }
-        }
-        stage('unit te') {
-            steps {
-                sh "mvn surefire-report:report"
+                sh "mvn clean install"
             }
         }
   }
