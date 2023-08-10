@@ -5,9 +5,8 @@ pipeline {
                 steps {
                     sshagent(['docker']) {
                         sh 'ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.188.8 id"
-
-    // some block
-}
+                        }
+        }
     }
-  
+  }
 }
