@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    tools {
-	    maven "maven-3"
+    environment {
+        PATH = "/opt/maven/bin:$PATH"
     }
     stages {
         stage('build') {
@@ -16,12 +16,12 @@ pipeline {
         }
         stage('docker image') {
             steps {
-                sh "docker build -t new /var/lib/jenkins/workspace/docker"
+                sh "docker build -t test1 /var/lib/jenkins/workspace/test1"
             }
         }
         stage('deploying in dev') {
             steps {
-                sh "docker run -d --name web -p 8088:8080 new"
+                sh "docker run -d --name world -p 8088:8080 test1"
             }
         }
         stage('approval') {
@@ -33,7 +33,7 @@ pipeline {
         }
         stage('deployment') {
             steps {
-                echo "deployed"
+                echo "successfully deployed in production"
             }
         }
     }
