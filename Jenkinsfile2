@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    stages {
+        stage('docker list') {
+            steps {
+                sshagent (credentials: ['docker']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.188.8 uname -a
+                        docker images
+                       ''' 
+                    }
+                }
+            }
+    }
+  
+}
