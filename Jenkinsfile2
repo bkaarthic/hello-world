@@ -1,16 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('docker list') {
-            steps {
-                sshagent (credentials: ['docker']) {
-                    sh '''
-                        ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.188.8 uname -a
-                        docker images
-                       ''' 
-                    }
-                }
-            }
             stage('pub') {
                 steps {
                     sshPublisher(publishers: [sshPublisherDesc(configName: 'tomcat', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker images', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
