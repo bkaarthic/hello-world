@@ -4,10 +4,7 @@ pipeline {
             stage('pub') {
                 steps {
                     sshagent(['docker-ssh']) {
-                        sh '''
-                            ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.198.19 id
-                            docker build -t new /home/dockeradmin/demo
-                            '''
+                        sh 'ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.198.19 pwd'
                         }
         }
     }
