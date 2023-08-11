@@ -19,5 +19,10 @@ pipeline {
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'tomcat', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/demo', remoteDirectorySDF: false, removePrefix: 'webapp/target', sourceFiles: 'webapp/target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
+        stage('docker image') {
+                steps {
+                    sshagent(['docker-ssh']) {
+                        sh 'ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.198.19 ./demo/build.sh'
+                        }
     }
 }
