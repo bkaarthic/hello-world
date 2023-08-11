@@ -20,7 +20,7 @@ pipeline {
       }
     }
     stage('Deploy') {
-      stpes {
+      steps {
         sshagent(['docker']) {
           sh 'ssh -o StrictHostKeyChecking=no -l dockeradmin 65.0.132.43 id'
               }
