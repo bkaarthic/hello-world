@@ -28,7 +28,7 @@ pipeline {
     }
     stage('Deploying on Prod') {
       steps {
-        echo "Successfully deployed in Prod')
+        echo "Successfully deployed in Prod"
       }
   }
   }
