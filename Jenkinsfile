@@ -19,12 +19,17 @@ pipeline {
         sshPublisher(publishers: [sshPublisherDesc(configName: 'webserver', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/demo', remoteDirectorySDF: false, removePrefix: 'webapp/target', sourceFiles: 'webapp/target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
       }
     }
-    stage('Deploy') {
+    stage('Deploying in Test') {
       steps {
         sshagent(['docker']) {
           sh 'ssh -o StrictHostKeyChecking=no -l dockeradmin 65.0.132.43 ./demo/build.sh'
               }
         }
-    }  
+    }
+    stage('Deploying on Prod') {
+      steps {
+        echo "Successfully deployed in Prod')
+      }
+  }
   }
 }
