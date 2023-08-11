@@ -24,5 +24,7 @@ pipeline {
                     sshagent(['docker-ssh']) {
                         sh 'ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.198.19 ./demo/build.sh'
                         }
+                }
+            }
     }
 }
