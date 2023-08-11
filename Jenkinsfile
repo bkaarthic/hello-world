@@ -26,12 +26,17 @@ pipeline {
                         }
                 }
             }
-        stage('docker image') {
+        stage('deploying in Test') {
                 steps {
                     sshagent(['docker-ssh']) {
                         sh 'ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.198.19 ./demo/build.sh'
                         }
                 }
             }
+        stage ('deploying in prod') {
+                steps {
+                    echo "Deployed in production"
+                }
+        }
     }
 }
