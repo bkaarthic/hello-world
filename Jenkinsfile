@@ -33,6 +33,11 @@ pipeline {
               }
         }
     }
+    stage('Approval') {
+      steps {
+        input message: 'Do you want to proceed ?', ok: 'Yes'
+      }
+    }
     stage('Deploying on Prod') {
       steps {
         echo "Successfully deployed in Prod"
