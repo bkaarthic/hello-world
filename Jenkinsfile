@@ -33,6 +33,13 @@ pipeline {
                         }
                 }
             }
+        stage('approval') {
+                steps {
+                    timeout(time: 5, unit: 'HOURS') {
+                        input message: 'Can we proceed to next stage?', ok: 'Yes'
+                    }
+                }
+        }
         stage ('deploying in prod') {
                 steps {
                     echo "Deployed in production"
