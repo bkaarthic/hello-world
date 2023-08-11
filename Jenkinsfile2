@@ -3,8 +3,8 @@ pipeline {
     stages {
             stage('pub') {
                 steps {
-                    sshagent(['docker']) {
-                        sh 'ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.188.8 id"
+                    sshagent(['docker-ssh']) {
+                        sh 'ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.198.19 id"
                         }
         }
     }
