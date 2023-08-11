@@ -5,6 +5,7 @@ pipeline {
                 steps {
                     sshagent(['docker-ssh']) {
                         sh 'ssh -o StrictHostKeyChecking=no -l dockeradmin 3.111.198.19 id'
+                        sh "docker build -t new /home/dockeradmin/demo"
                         }
         }
     }
